@@ -47,3 +47,13 @@ while user_input != "exit":
     result['messages'] = conversational_history
     
 
+with open("logging.txt",'w') as file:
+    file.write(f"Your Log !\n")
+    for message in conversational_history:
+        if isinstance(message, HumanMessage):
+            file.write(f"you : {str(message.content)}\n")
+        elif isinstance(message, AIMessage):
+            file.write(f"AI : {str(message.content)}\n\n")
+    file.write("End of Conversation")
+
+print("History saved !")

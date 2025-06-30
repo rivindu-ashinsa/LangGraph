@@ -1,0 +1,5 @@
+Your Log !
+you : hii my name is rivindu
+AI :  Hello Rivindu! It's nice to meet you. How can I assist you today? Let's have a great conversation together!
+
+you : what's 2 plus 2

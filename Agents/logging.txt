@@ -1,0 +1,5 @@
+Your Log !
+you : hii my name is rivindu
+AI :  Hello Rivindu! How can I assist you today? I'm here to help answer any questions or provide information you may need.
+
+End of Conversation
