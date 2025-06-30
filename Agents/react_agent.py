@@ -83,5 +83,5 @@ def print_stream(stream):
             print(message)
         else:
             message.pretty_print()
-
-print_stream(app.stream(inputs, stream_mode="values"))
+            
+print(app.stream(inputs, stream_mode="values"))
