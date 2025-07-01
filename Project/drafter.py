@@ -1,4 +1,4 @@
-from langgraph.graph import StateGraph, END, START
+from langgraph.graph import StateGraph, END
 from typing import TypedDict, Annotated, Sequence
 from dotenv import load_dotenv
 from langchain_core.messages import SystemMessage, BaseMessage, ToolMessage, HumanMessage
@@ -20,10 +20,12 @@ class Agentstate(TypedDict):
 
 @tool
 def update(content: str)  -> str:
-    """updates the document with provided content"""
+    """update the document with provided content"""
     global document_content
     document_content = content
-    return f"Document updated with content: {content}"
+    return f"Document updated with content: {document_content}"
+
+
 
 @tool 
 def save(filename: str) -> str:
@@ -32,10 +34,10 @@ def save(filename: str) -> str:
         filename : name of the text file
     
     """
-
+    global document_content
     if not filename.endswith(".txt"):
         filename = f"{filename}.txt"
-
+ 
     try:
         with open(filename, "w") as file:
             file.write(document_content)
@@ -77,13 +79,9 @@ def model_call(state: Agentstate) -> Agentstate:
     response = llm.invoke(all_messages)
     print(f"\nAssistant : {response.content}")
 
-    if hasattr(response, 'tool_calls') and response.tool_calls:
-        tool_message = ToolMessage(
-            content=response.content,
-            tool_calls=response.tool_calls
-        )
-
+    # If you want to handle tool calls, implement logic here
     return {"messages": list(state['messages']) + [user_message, response]}
+
 
 def should_continue(state: Agentstate) -> str:
     """Determine if we should end the conversation or continue."""
@@ -98,11 +96,14 @@ def should_continue(state: Agentstate) -> str:
             return "end"
     return "continue"
 
+
 def print_messages(messages):
     if not messages:
         return
-    for message in messages[-3]:
-        print(f"\nTOOL RESULT : {message.content}")
+    last_msg = messages[-1]
+    if isinstance(last_msg, ToolMessage):
+        print(f"\nTOOL RESULT: {last_msg.content}")
+
 
 graph = StateGraph(Agentstate)
 graph.add_node("agent",model_call)
@@ -120,4 +121,17 @@ graph.add_conditional_edges(
     }
 )
 
-graph.compile()
+app = graph.compile()
+
+def run_document_drafter():
+    print("\n======== Drafter ========\n")
+    state= {"messages": []}
+    for step in app.stream(state, stream_mode="values"):
+        if "messages" in step:
+            print_messages(step["messages"])
+    
+    print("\n======== Drafter Finished ========\n")
+
+
+if __name__ == "__main__":
+    run_document_drafter()
