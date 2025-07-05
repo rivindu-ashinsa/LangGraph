@@ -26,66 +26,64 @@ This repository contains a collection of Jupyter notebooks and Python scripts de
     └── logging-checkpoint.txt
 ```
 
-- **[`LangGraph.ipynb`](LangGraph.ipynb)**: Main notebook containing step-by-step LangGraph examples, from basic graphs to advanced LLM-powered agents and project agents.
-- **[`Agents/`](Agents/)**: Example agent scripts, including [`agent1.py`](Agents/agent1.py), [`agent2.py`](Agents/agent2.py), and [`react_agent.py`](Agents/react_agent.py).
-- **[`Project/drafter.py`](Project/drafter.py)**: Example of a document drafting agent using LangGraph and LLM tools.
-- **.env**: Environment variables (e.g., API keys for OpenAI/OpenRouter).
+- **LangGraph.ipynb**: Main notebook with LangGraph examples.
+- **Agents/**: Example agent scripts.
+- **Project/drafter.py**: Document drafting agent example.
+- **.env**: Environment variables (API keys).
 - **requirements.txt**: Python dependencies.
-- **.ipynb_checkpoints/**: Jupyter notebook and script checkpoints (auto-generated).
-- **email_to_bob.txt**: Example output or data file.
-- **test.py**: Additional test or utility script.
+- **test.py**: Utility or test script.
+- **email_to_bob.txt**: Example output/data file.
+- **.ipynb_checkpoints/**: Jupyter notebook/script checkpoints.
 
 ## Key Examples
 
 ### 1. Basic Graphs
 
 - Simple greeting node using a `TypedDict` state.
-- How to define nodes, set entry/exit points, and invoke the graph.
+- Defining nodes, entry/exit points, and invoking the graph.
 
 ### 2. Conditional and Multi-step Graphs
 
 - Graphs with multiple nodes and edges.
-- Conditional routing based on state (e.g., sum vs. product, addition vs. subtraction).
-- Multi-step workflows with state accumulation.
+- Conditional routing and multi-step workflows.
 
 ### 3. Looping Graphs
 
-- Examples of looping until a condition is met (e.g., random number generation, number guessing game).
+- Looping until a condition is met (e.g., number guessing).
 
 ### 4. LLM Integration
 
-- Using `langchain_openai.ChatOpenAI` with LangGraph for conversational agents.
-- Passing API keys via [`.env`](.env) and using OpenRouter as a backend.
-- Maintaining conversational memory in the agent state.
+- Using `langchain_openai.ChatOpenAI` with LangGraph.
+- Passing API keys via `.env` and using OpenRouter.
+- Conversational memory in agent state.
 
 ### 5. Project Agents
 
-- Document drafting and updating with tool integration (see [`Project/drafter.py`](Project/drafter.py)).
+- Document drafting and updating with tool integration.
 
 ## Setup
 
 1. **Clone the repository**
-   ```sh
+   ```
    git clone <repo-url>
    cd <repo-directory>
    ```
 
 2. **Install dependencies**
-   ```sh
+   ```
    pip install -r requirements.txt
    ```
-   *(You may need to create `requirements.txt` with packages like `langgraph`, `langchain-core`, `langchain-openai`, `python-dotenv`, `jupyter`, etc.)*
 
 3. **Set up environment variables**
 
-   Create a [`.env`](.env) file with your API keys:
+   Create a `.env` file:
    ```
    OPENAI_KEY=your-openai-or-openrouter-key
    ```
 
 4. **Run the notebooks**
 
-   Open [`LangGraph.ipynb`](LangGraph.ipynb) in Jupyter or VS Code and run the cells.
+   Open `LangGraph.ipynb` in Jupyter or VS Code and run the cells.
 
 ## Example: Running a Graph
 
@@ -112,7 +110,7 @@ print(result['message'])  # Output: Hello, World
 
 ## LLM Agent Example
 
-See the section in [`LangGraph.ipynb`](LangGraph.ipynb) for a conversational agent using OpenAI/OpenRouter:
+See the section in `LangGraph.ipynb` for a conversational agent using OpenAI/OpenRouter:
 
 ```python
 from langchain_openai import ChatOpenAI
@@ -147,5 +145,4 @@ agent = graph.compile()
 This repository is for educational and demonstration purposes.
 
 ---
-
-For more details and advanced usage,
+For more details and advanced usage, see the code and notebooks
